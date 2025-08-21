@@ -1,0 +1,44 @@
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+header {
+  background: #007acc;
+  color: white;
+  padding: 20px;
+}
+
+section {
+  padding: 20px;
+}
+
+img {
+  max-width: 100%;   
+  height: auto;
+  border-radius: 10px;
+  margin-top: 10px;
+}
+
+section {
+  font-size: 18px;
+}
+
+
+@media (max-width: 600px) {
+  header {
+    font-size: 20px;
+    padding: 10px;
+  }
+
+  section {
+    font-size: 14px;
+  }
+
+  img {
+    width: 90%;
+  }
+}
