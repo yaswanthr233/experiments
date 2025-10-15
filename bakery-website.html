@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sweet Delights Bakery</title>
+  <link rel="stylesheet" href="bakery-website.css">
+</head>
+<body>
+
+
+  <header>
+    <h1>Sweet Delights Bakery</h1>
+  </header>
+
+  <nav>
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#menu">Menu</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  
+  <section id="home" class="slideshow-container">
+    <div class="slide fade">
+      <img src="cake1.jpg" alt="Chocolate Cake">
+      <div class="caption">Delicious Chocolate Cake</div>
+    </div>
+    <div class="slide fade">
+      <img src="pastry.jpg" alt="Pastry">
+      <div class="caption">Fresh Creamy Pastries</div>
+    </div>
+    <div class="slide fade">
+      <img src="cupcake.jpg" alt="Cupcake">
+      <div class="caption">Colorful Cupcakes</div>
+    </div>
+  </section>
+
+
+  <section id="menu" class="content">
+    <h2>Our Menu</h2>
+    <p>We offer a variety of cakes, cookies, and pastries made fresh daily!</p>
+  </section>
+
+  <section id="gallery" class="content">
+    <h2>Gallery</h2>
+    <p>Take a look at our featured products below.</p>
+  </section>
+
+  <section id="contact" class="content">
+    <h2>Contact Us</h2>
+    <p>Visit us at Main Street, City or call (123) 456-7890.</p>
+  </section>
+
+  <footer>
+    <p>© 2025 Sweet Delights Bakery | Made with love 🍰</p>
+  </footer>
+
+  
+  <script>
+    let slideIndex = 0;
+    showSlides();
+    function showSlides() {
+      const slides = document.getElementsByClassName("slide");
+      for (let i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";  
+      }
+      slideIndex++;
+      if (slideIndex > slides.length) {slideIndex = 1}    
+      slides[slideIndex-1].style.display = "block";  
+      setTimeout(showSlides, 3000); 
+    }
+  </script>
+
+</body>
+</html>
