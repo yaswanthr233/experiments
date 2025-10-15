@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Registration Form</title>
+  <link rel="stylesheet" href="registration-form.css">
+</head>
+<body>
+
+  <div class="container">
+    <h2>Registration Form</h2>
+
+    <form id="registrationForm" novalidate>
+      <label for="fullName">Full Name:</label>
+      <input type="text" id="fullName" name="fullName" required>
+      <small class="error" id="nameError"></small>
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required>
+      <small class="error" id="emailError"></small>
+
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" required>
+      <small class="error" id="passwordError"></small>
+
+      <label for="phone">Phone Number:</label>
+      <input type="tel" id="phone" name="phone" pattern="[0-9]{10}" required>
+      <small class="error" id="phoneError"></small>
+
+      <button type="submit">Register</button>
+    </form>
+
+    <div id="successMessage" class="success"></div>
+  </div>
+
+  <script>
+    const form = document.getElementById('registrationForm');
+    const nameField = document.getElementById('fullName');
+    const emailField = document.getElementById('email');
+    const passwordField = document.getElementById('password');
+    const phoneField = document.getElementById('phone');
+
+    const nameError = document.getElementById('nameError');
+    const emailError = document.getElementById('emailError');
+    const passwordError = document.getElementById('passwordError');
+    const phoneError = document.getElementById('phoneError');
+    const successMessage = document.getElementById('successMessage');
+
+    const emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+
+    
+    function validateField(field, condition, errorElement, message) {
+      if (condition) {
+        field.classList.remove('invalid');
+        field.classList.add('valid');
+        errorElement.textContent = '';
+        return true;
+      } else {
+        field.classList.remove('valid');
+        field.classList.add('invalid');
+        errorElement.textContent = message;
+        return false;
+      }
+    }
+        nameField.addEventListener('input', () => {
+      validateField(nameField, nameField.value.trim() !== '', nameError, 'Full name is required.');
+    });
+    emailField.addEventListener('input', () => {
+      validateField(emailField, emailPattern.test(emailField.value), emailError, 'Enter a valid email address.');
+    });
+    passwordField.addEventListener('input', () => {
+      const value = passwordField.value;
+      const strongPassword = /^(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9]).{8,}$/;
+      validateField(passwordField, strongPassword.test(value),
+        passwordError,
+        'Password must be 8+ chars, include a number, uppercase, and symbol.');
+    });
+    phoneField.addEventListener('input', () => {
+      validateField(phoneField, /^[0-9]{10}$/.test(phoneField.value),
+        phoneError, 'Enter a valid 10-digit phone number.');
+    });
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const isNameValid = validateField(nameField, nameField.value.trim() !== '', nameError, 'Full name is required.');
+      const isEmailValid = validateField(emailField, emailPattern.test(emailField.value), emailError, 'Enter a valid email address.');
+      const isPasswordValid = validateField(passwordField, /^(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9]).{8,}$/.test(passwordField.value),
+        passwordError, 'Password must be strong.');
+      const isPhoneValid = validateField(phoneField, /^[0-9]{10}$/.test(phoneField.value), phoneError, 'Enter a valid 10-digit phone number.');
+
+      if (isNameValid && isEmailValid && isPasswordValid && isPhoneValid) {
+        successMessage.textContent = '🎉 Registration Successful!';
+        form.reset();
+        document.querySelectorAll('input').forEach(i => i.classList.remove('valid'));
+      } else {
+        successMessage.textContent = '';
+      }
+    });
+  </script>
+</body>
+</html>
